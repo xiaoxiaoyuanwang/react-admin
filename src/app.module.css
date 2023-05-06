@@ -1,0 +1,46 @@
+.layout {
+  overflow: auto;
+  height: 100vh;
+}
+.header{
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.collapsed_btn {
+  font-size: 16px;
+  display: inline-block;
+  color: #fff;
+  cursor: pointer;
+  padding: 0 15px;
+}
+
+.content {
+  margin: 16px;
+  height: calc(100vh - 64px);
+  overflow: auto;
+}
+
+.content_wrapper {
+  padding: 24px;
+  background: #fff;
+  min-height: 100%;
+}
+
+.title_n {
+  height: 32px;
+  line-height: 32px;
+  margin: 16px;
+  color: #fff;
+}
+
+.title_m {
+  font-size: 20px;
+  transition: 0.5s;
+}
+
+.title_s {
+  font-size: 10px;
+  transition: 0.3s;
+}
