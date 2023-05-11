@@ -288,14 +288,13 @@ const Transform = () => {
   };
   return (
     <React.Fragment>
-      <div>{showBtn}</div>
       {showBtn ? (
         <div
           style={{
             display: "inline-block",
             position: "fixed",
             top: "23px",
-            right: "100px",
+            right: "200px",
             zIndex: "31",
           }}
         >

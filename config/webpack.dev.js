@@ -60,7 +60,7 @@ module.exports = {
     // 当使用HTML5 History API时，可能必须使用index.html页面来代替任何404响应。通过将devServer.historyPiFallback设置为true来启用它
     historyApiFallback: true,
   },
-  devtool: "cheap-source-map",
+  devtool: "source-map",
   resolve: {
     // 自动解析文件扩展名
     extensions: [
