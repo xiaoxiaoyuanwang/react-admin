@@ -1,8 +1,13 @@
 const path = require("path");
 // eslint检验
 const ESLintPlugin = require("eslint-webpack-plugin");
+const webpack = require("webpack");
+const envConfig = require("./url.config");
 // html模板
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+// 添加注释块
+const BannerWebpackPlugin = require("../plugins/banner-webpack-plugin");
+const TimeWebpackPlugin = require("../plugins/time-webpack-plugin");
 // 本插件会将 CSS 提取到单独的文件中，为每个包含 CSS 的 JS 文件创建一个 CSS 文件，支持link引入
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // css压缩插件
@@ -18,6 +23,8 @@ const WorkboxPlugin = require("workbox-webpack-plugin");
 // 显示打包进度条
 const WebpackBar = require("webpackbar");
 const ProgressBarWebpackPlugin = require("progress-bar-webpack-plugin");
+// 先清除 dist 文件夹
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const os = require("os");
 const threads = os.cpus().length; // 获取cpu核数
@@ -144,12 +151,23 @@ module.exports = {
               cacheCompression: false, // 关闭缓存压缩
             },
           },
+          {
+            loader: "./loaders/clean-log-loader",
+          },
+          // {
+          //   loader: "./loaders/banner-loader",
+          //   options: {
+          //     author: "小小愿望",
+          //   },
+          // },
         ],
       },
     ],
   },
   //
   plugins: [
+    // 先清除 dist 文件夹
+    new CleanWebpackPlugin(),
     new ESLintPlugin({
       // 检查哪些文件
       context: path.resolve(__dirname, "../src"),
@@ -191,6 +209,13 @@ module.exports = {
     // 显示打包进度
     new WebpackBar(),
     new ProgressBarWebpackPlugin(),
+    new webpack.DefinePlugin({
+      "process.base_url": JSON.stringify(envConfig),
+    }),
+    new BannerWebpackPlugin({
+      author: "小小愿望",
+    }),
+    new TimeWebpackPlugin(),
   ],
   optimization: {
     // 代码分割

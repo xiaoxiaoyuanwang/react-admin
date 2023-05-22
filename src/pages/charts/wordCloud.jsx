@@ -1,18 +1,19 @@
 import React, { useEffect } from "react";
 import * as echarts from "echarts";
 import "echarts-wordcloud";
-import { getTechnical } from "../../services/resume";
+import { getTechnical } from "../../services/wordCloud";
 import sty from "./charts.module.css";
 function WordCloud() {
   useEffect(() => {
     getInfo();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const getInfo = () => {
     getTechnical().then((res) => {
-      initEcharts(res.data.chartData.series);
+      initEcharts(res.chartData.series);
     });
   };
-  const initEcharts = (list) => {
+  const initEcharts = (list=[]) => {
     var keywords = [];
     for (let index = 0; index < list.length; index++) {
       let item = list[index];

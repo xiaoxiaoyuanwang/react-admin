@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "antd";
 function Home() {
+  console.log(2222);
   return (
     <div>
       <Button style={{ marginRight: 10 }} type="primary">

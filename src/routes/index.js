@@ -15,6 +15,11 @@ export const BarChartRanking = lazy(() =>
     /* webpackChunkName: 'barChartRanking' */ "../pages/charts/barChartRanking"
   )
 );
+export const BarChartBaseLine = lazy(() =>
+  import(
+    /* webpackChunkName: 'barChartBaseLine' */ "../pages/charts/barChartBaseLine"
+  )
+);
 // 菜单中显示的路由
 export const routersMenu = [
   {
@@ -42,6 +47,11 @@ export const routersMenu = [
         key: "/bar_chart_ranking",
         label: "Bar Chart Ranking",
         element: <BarChartRanking />,
+      },
+      {
+        key: "/bar_chart_base_line",
+        label: "Bar Chart Base Line",
+        element: <BarChartBaseLine />,
       },
     ],
   },

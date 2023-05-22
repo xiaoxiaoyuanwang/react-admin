@@ -5,6 +5,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: url("../../assets//loginBg.jpeg") no-repeat center;
+  background-size: cover;
+  background-attachment: fixed;
+  overflow: auto;
 }
 .login_title {
   text-align: center;

@@ -1,6 +1,8 @@
 const path = require("path");
 // eslint检验
 const ESLintPlugin = require("eslint-webpack-plugin");
+const webpack = require("webpack");
+const envConfig = require("./url.config");
 // html模板
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 // HMR
@@ -131,6 +133,9 @@ module.exports = {
               plugins: ["react-refresh/babel"], // HMR js
             },
           },
+          {
+            loader: "./loaders/clean-log-loader",
+          },
         ],
       },
     ],
@@ -150,6 +155,9 @@ module.exports = {
     }),
     // HMR js
     new ReactRefreshWebpackPlugin(),
+    new webpack.DefinePlugin({
+      "process.base_url": JSON.stringify(envConfig),
+    }),
   ],
   optimization: {
     // 代码分割

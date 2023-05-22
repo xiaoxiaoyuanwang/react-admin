@@ -3,6 +3,7 @@ import { Button, Checkbox, Form, Input, Card, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import sty from "./index.module.css";
+import { getLogin } from "../../services/login"
 const LoginPage = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -19,8 +20,13 @@ const LoginPage = () => {
     if (values.username !== "admin" || values.password !== "123456") {
       return message.error("账号或密码错误");
     }
-    localStorage.setItem("userInfo", JSON.stringify(values));
-    navigate("/");
+    getLogin(values).then((res) => {
+      let token =res.data;
+      localStorage.setItem("token", token.token);
+      localStorage.setItem("menu", JSON.stringify(res.data.menu));
+      localStorage.setItem("userInfo", JSON.stringify(values));
+      navigate("/");
+    })
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);

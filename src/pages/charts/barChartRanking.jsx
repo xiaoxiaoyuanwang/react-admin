@@ -1,13 +1,19 @@
 import React, { useEffect } from "react";
 import * as echarts from "echarts";
+import { getRanking } from "../../services/barChartRanking";
 import sty from "./charts.module.css";
 function BarChartRanking() {
   useEffect(() => {
-    initEcharts();
+    getInfo();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const initEcharts = () => {
-    let ydata = ["上海", "北京", "深圳", "天津", "河南", "新疆", "澳门"];
-    let xdata = [12, 13, 14, 15, 16, 17, 18];
+  const getInfo = () => {
+    getRanking().then((res) => {
+      initEcharts(res.chartData.series);
+    });
+  };
+  const initEcharts = (list = []) => {
+    const dt = list.sort((a, b) => a.value - b.value);
     let option = {
       tooltip: {
         trigger: "axis",
@@ -25,7 +31,7 @@ function BarChartRanking() {
       },
       yAxis: {
         type: "category",
-        data: ydata,
+        data: dt.map((item) => item.name),
         axisLine: {
           show: false,
         },
@@ -39,17 +45,18 @@ function BarChartRanking() {
           overflow: "truncate",
           formatter: function (value, index) {
             let ind = index + 1;
-            if (ind == ydata.length) {
-              return "{one|" + (ydata.length - index) + "} {a|" + value + "}";
-            } else if (ind + 1 == ydata.length) {
-              return "{two|" + (ydata.length - index) + "} {b|" + value + "}";
-            } else if (ind + 2 == ydata.length) {
-              return "{three|" + (ydata.length - index) + "} {c|" + value + "}";
+            let dtLength = dt.length;
+            if (ind === dtLength) {
+              return "{one|" + (dtLength - index) + "} {a|" + value + "}";
+            } else if (ind + 1 === dtLength) {
+              return "{two|" + (dtLength - index) + "} {b|" + value + "}";
+            } else if (ind + 2 === dtLength) {
+              return "{three|" + (dtLength - index) + "} {c|" + value + "}";
             }
-            if (ydata.length - index > 9) {
-              return "{five|" + (ydata.length - index) + "} {d|" + value + "}";
+            if (dtLength - index > 9) {
+              return "{five|" + (dtLength - index) + "} {d|" + value + "}";
             }
-            return "{four|" + (ydata.length - index) + "} {d|" + value + "}";
+            return "{four|" + (dtLength - index) + "} {d|" + value + "}";
           },
           rich: {
             a: {
@@ -130,7 +137,7 @@ function BarChartRanking() {
           itemStyle: {
             color: "#5B8FF9",
           },
-          data: xdata,
+          data: dt,
         },
       ],
     };

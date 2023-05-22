@@ -62,38 +62,31 @@ request.interceptors.response.use(
   (response) => {
     // 关闭loading
     tryHideFullScreenLoading();
-    const res = response.data;
-    if (!res.data.success) {
-      // B002:Token 过期了;
-      if (res.code === "B002") {
-        // 最后一次出弹框
-        if (needLoadingRequestCount === 0) {
-          confirm({
-            icon: <ExclamationCircleOutlined />,
-            content: `你已被登出，可以取消继续留在该页面，
-            或者重新登录, 确定登出`,
-            onOk() {
-              // 返回登录页
-              // ...做些事情
-              // 为了重新实例化vue-router对象 避免bug
-              window.location.href = "/";
-            },
-            onCancel() {
-              console.log("Cancel");
-            },
-          });
-        }
-      } else {
-        message.error(res.msg);
+    const res = response.data.data;
+    if (res.code === 401) {
+      // 最后一次出弹框
+      if (needLoadingRequestCount === 0) {
+        confirm({
+          icon: <ExclamationCircleOutlined />,
+          content: `你已被登出，可以取消继续留在该页面，
+          或者重新登录, 确定登出`,
+          onOk() {
+            // 返回登录页
+            // ...做些事情
+            // 为了重新实例化vue-router对象 避免bug
+            window.location.href = "/";
+          },
+          onCancel() {
+            console.log("Cancel");
+          },
+        });
       }
       return Promise.reject(res.msg || "error");
-    } else {
-      // 如果存在token
-      let token = response.headers.authorization;
-      if (token) {
-        localStorage.setItem("token", token);
-      }
+    } else if(res.code === 200){
       return res;
+    } else {
+      message.error(res.msg);
+      return Promise.reject(res.msg || "error");
     }
   },
   (error) => {
