@@ -232,7 +232,9 @@ function BarChartBaseLine() {
     };
     setEchartsOptions(option);
   };
-
+console.log('====================================');
+console.log(1111);
+console.log('====================================');
   return (
     <>
       <ReactECharts

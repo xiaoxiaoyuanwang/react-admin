@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as echarts from "echarts";
+import ReactECharts from "echarts-for-react";
 import { getRanking } from "../../services/barChartRanking";
 import sty from "./charts.module.css";
 function BarChartRanking() {
+  const [echartsOptions, setEchartsOptions] = useState({});
   useEffect(() => {
     getInfo();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const getInfo = () => {
     getRanking().then((res) => {
@@ -141,10 +143,14 @@ function BarChartRanking() {
         },
       ],
     };
-    var chartDom = document.getElementById("echarts_wrapper");
-    var myChart = echarts.init(chartDom);
-    option && myChart.setOption(option);
+    option && setEchartsOptions(option);
   };
-  return <div id="echarts_wrapper" className={sty.echarts_wrapper}></div>;
+  return (
+    <ReactECharts
+      option={echartsOptions}
+      className={sty.echarts_wrapper}
+      echarts={echarts}
+    />
+  );
 }
 export default BarChartRanking;

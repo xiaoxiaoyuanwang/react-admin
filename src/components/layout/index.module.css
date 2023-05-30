@@ -19,14 +19,14 @@
 }
 
 .content {
-  margin: 16px;
-  max-height: calc(100vh - 100px);
+  padding: 16px;
+  max-height: calc(100vh - 64px);
   overflow: auto;
 }
 
 .content_wrapper {
-  padding: 24px;
-  background: #fff;
+  /* padding: 24px; */
+  /* background: #fff; */
   min-height: 100%;
 }
 

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Switch } from "antd";
 import { CloseCircleOutlined } from "@ant-design/icons";
 import moment from "moment";
+import { getTransform } from "../../services/transform";
 import "./index.scss";
 import transform_icon from "../../assets/transform/transform_icon.png";
 import transform_bg from "../../assets/transform/transform_bg.jpeg";
@@ -52,52 +53,9 @@ const Transform = () => {
     initStyle();
   }, [tableList]);
   const getTableList = () => {
-    let list = [
-      {
-        showoption: "btn",
-        starttime: "2022-09-03",
-        endtime: "2023-09-03",
-        imagaddress: [
-          {
-            path: transform_icon,
-          },
-        ],
-      },
-      {
-        showoption: "burst",
-        starttime: "2022-09-03",
-        endtime: "2023-09-03",
-        imagaddress: [
-          {
-            path: transform_bg,
-          },
-        ],
-      },
-      {
-        showoption: "float",
-        starttime: "2022-09-03",
-        endtime: "2023-09-03",
-        imagaddress: [
-          {
-            path: transform_icon,
-          },
-          {
-            path: transform_icon,
-          },
-        ],
-      },
-      {
-        showoption: "header",
-        starttime: "2022-09-03",
-        endtime: "2023-09-03",
-        imagaddress: [
-          {
-            path: transform_bg,
-          },
-        ],
-      },
-    ];
-    setTableList(list);
+    getTransform().then((res)=> {
+      setTableList(res.list);
+    })
   };
   // 获取七条数据
   const initList = (data, cb) => {

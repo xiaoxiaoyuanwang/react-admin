@@ -133,9 +133,9 @@ module.exports = {
               plugins: ["react-refresh/babel"], // HMR js
             },
           },
-          {
-            loader: "./loaders/clean-log-loader",
-          },
+          // {
+          //   loader: "./loaders/clean-log-loader",
+          // },
         ],
       },
     ],

@@ -10,16 +10,28 @@ import LayoutPage from "./components/layout";
 function App() {
   const loading = useSelector((state) => state.loadingStore.loading);
   const routerList = initRouterArr([...routersMenu, ...routersMenuHide]);
+  const token = localStorage.getItem("token");
   return (
     <Spin tip="Loading..." spinning={loading}>
       <Suspense>
         <Routes fallback={<div>loading</div>}>
           <Route
+            path="/login"
+            exact
+            element={token ? <Navigate to="/home" replace={true} /> : <Login />}
+          />
+          <Route
             path="/"
             exact
             element={<Navigate to="/home" replace={true} />}
           />
-          <Route path="/" exact element={<LayoutPage />}>
+          <Route
+            path="/"
+            exact
+            element={
+              token ? <LayoutPage /> : <Navigate to="/login" replace={true} />
+            }
+          >
             {routerList.map((item, index) => {
               if (item.element) {
                 return (
@@ -34,7 +46,6 @@ function App() {
               }
             })}
           </Route>
-          <Route path="/login" element={<Login />} />
         </Routes>
       </Suspense>
     </Spin>

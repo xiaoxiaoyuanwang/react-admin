@@ -1,3 +1,53 @@
+export const transform = {
+  data: {
+    code: 200,
+    list: [
+      {
+        showoption: "btn",
+        starttime: "2022-09-03",
+        endtime: "3023-09-03",
+        imagaddress: [
+          {
+            path: "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4c08c720459b4114880d87553039970d~tplv-k3u1fbpfcp-watermark.image?",
+          },
+        ],
+      },
+      {
+        showoption: "burst",
+        starttime: "2022-09-03",
+        endtime: "3023-09-03",
+        imagaddress: [
+          {
+            path: "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/af9bb92e86064bd095a21cdb46add626~tplv-k3u1fbpfcp-watermark.image?",
+          },
+        ],
+      },
+      {
+        showoption: "float",
+        starttime: "2022-09-03",
+        endtime: "3023-09-03",
+        imagaddress: [
+          {
+            path: "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4c08c720459b4114880d87553039970d~tplv-k3u1fbpfcp-watermark.image?",
+          },
+          {
+            path: "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4c08c720459b4114880d87553039970d~tplv-k3u1fbpfcp-watermark.image?",
+          },
+        ],
+      },
+      {
+        showoption: "header",
+        starttime: "2022-09-03",
+        endtime: "3023-09-03",
+        imagaddress: [
+          {
+            path: "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/af9bb92e86064bd095a21cdb46add626~tplv-k3u1fbpfcp-watermark.image?",
+          },
+        ],
+      },
+    ],
+  },
+};
 export const rangking = {
   data: {
     code: 200,

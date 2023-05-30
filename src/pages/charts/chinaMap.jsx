@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as echarts from "echarts";
+import ReactECharts from "echarts-for-react";
 import { getMap } from "../../services/chinaMap";
 import sty from "./charts.module.css";
 import "../../components/Charts/map/js/china.js";
 function ChinaMap() {
+  const [echartsOptions, setEchartsOptions] = useState({});
   useEffect(() => {
     getInfo();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const getInfo = () => {
     getMap().then((res) => {
@@ -83,11 +85,15 @@ function ChinaMap() {
         },
       ],
     };
-    var chartDom = document.getElementById("echarts_wrapper");
-    var myChart = echarts.init(chartDom);
 
-    option && myChart.setOption(option);
+    option && setEchartsOptions(option);
   };
-  return <div id="echarts_wrapper" className={sty.echarts_wrapper}></div>;
+  return (
+    <ReactECharts
+      option={echartsOptions}
+      className={sty.echarts_wrapper}
+      echarts={echarts}
+    />
+  );
 }
 export default ChinaMap;

@@ -1,19 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as echarts from "echarts";
+import ReactECharts from "echarts-for-react";
 import "echarts-wordcloud";
 import { getTechnical } from "../../services/wordCloud";
 import sty from "./charts.module.css";
 function WordCloud() {
+  const [echartsOptions, setEchartsOptions] = useState({});
   useEffect(() => {
     getInfo();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const getInfo = () => {
     getTechnical().then((res) => {
       initEcharts(res.chartData.series);
     });
   };
-  const initEcharts = (list=[]) => {
+  const initEcharts = (list = []) => {
     var keywords = [];
     for (let index = 0; index < list.length; index++) {
       let item = list[index];
@@ -58,10 +60,14 @@ function WordCloud() {
         },
       ],
     };
-    var chartDom = document.getElementById("echarts_wrapper");
-    var myChart = echarts.init(chartDom);
-    option && myChart.setOption(option);
+    option && setEchartsOptions(option);
   };
-  return <div id="echarts_wrapper" className={sty.echarts_wrapper}></div>;
+  return (
+    <ReactECharts
+      option={echartsOptions}
+      className={sty.echarts_wrapper}
+      echarts={echarts}
+    />
+  );
 }
 export default WordCloud;

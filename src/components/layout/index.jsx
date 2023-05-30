@@ -1,7 +1,7 @@
 // layout-index.jsx
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { Layout } from "antd";
+import { Layout, Card } from "antd";
 import sty from "./index.module.css";
 import Transform from "../Transform";
 import HeaderLayoutPage from "./HeaderLayout";
@@ -14,9 +14,9 @@ function LayoutPage() {
       <Layout>
         <HeaderLayoutPage />
         <Content className={sty.content}>
-          <div className={sty.content_wrapper}>
+          <Card className={sty.content_wrapper}>
             <Outlet />
-          </div>
+          </Card>
         </Content>
       </Layout>
       <Transform />
