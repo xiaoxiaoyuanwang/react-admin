@@ -4,12 +4,12 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import { Spin } from "antd";
 import { useSelector } from "react-redux";
 import "./app.css";
-import { routersMenu, routersMenuHide, Login } from "./routes";
+import { routersMenu, Login } from "./routes";
 import { initRouterArr } from "./uitls";
 import LayoutPage from "./components/layout";
 function App() {
   const loading = useSelector((state) => state.loadingStore.loading);
-  const routerList = initRouterArr([...routersMenu, ...routersMenuHide]);
+  const routerList = initRouterArr([...routersMenu]);
   const token = localStorage.getItem("token");
   return (
     <Spin tip="Loading..." spinning={loading}>

@@ -34,22 +34,22 @@ export const routersMenu = [
     label: "charts",
     children: [
       {
-        key: "/echarts_wordcloud",
+        key: "/charts/echartswordcloud",
         label: "Word Cloud",
         element: <Wordcloud />,
       },
       {
-        key: "/china_map",
+        key: "/charts/china_map",
         label: "China Map",
         element: <ChinaMap />,
       },
       {
-        key: "/bar_chart_ranking",
+        key: "/charts/bar_chart_ranking",
         label: "Bar Chart Ranking",
         element: <BarChartRanking />,
       },
       {
-        key: "/bar_chart_base_line",
+        key: "/charts/bar_chart_base_line",
         label: "Bar Chart Base Line",
         element: <BarChartBaseLine />,
       },
